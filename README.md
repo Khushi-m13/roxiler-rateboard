@@ -1,222 +1,182 @@
 RateBoard
 
-RateBoard is a web application for managing stores and their ratings. It supports three types of users — System Administrator, Normal User, and Store Owner — each with different access after login based on their role.
+RateBoard is a web application for managing stores and their ratings. It has three types of users — System Administrator, Normal User and Store Owner. Each user gets different access after login depending on their role.
 
-Built with React (frontend), Node.js + Express (backend), and MySQL (database).
+I built this project using React for the frontend, Node.js and Express for the backend, and MySQL for storing the application data.
 
-What the Application Does
+What the application does
+
+The main idea of the application is simple:
 
 Admin manages users and stores.
+Normal users can find stores and give ratings.
+Store owners can check the ratings received by their store.
 
-Normal Users find stores and give ratings.
-
-Store Owners check the ratings received by their store.
-
-All three roles share a single login page. After login, each user is automatically taken to the section available for their role.
+The application uses one login page for all three roles. After login, the user is automatically taken to the section available for their role.
 
 User Roles
-
 System Administrator
+
+The administrator has access to the overall system.
 
 From the Admin Dashboard, an administrator can:
 
-View total users, stores, and ratings
+See total users, stores and ratings.
+Add users.
+Add administrator accounts.
+Add stores.
+Assign a store to a store owner.
+View users and their details.
+Edit user information.
+Remove users.
+Search/filter users.
+Sort users and store listings.
+View store information and ratings.
 
-Add users (normal users, store owners, and other administrators)
-
-Add stores, and assign a store to a store owner
-
-View, edit, and remove users
-
-Search and filter users
-
-Sort user and store listings
-
-View store information and ratings
-
-Administrator accounts cannot be created from the public registration page — only an existing administrator can create one.
+The administrator account cannot be created from the normal public registration page. This is intentional so that anyone cannot simply register themselves as an administrator.
 
 Normal User
 
 A normal user can:
 
-Create an account and log in
-
-View and search registered stores (by name or address)
-
-Check a store's overall rating
-
-Submit a rating (1–5) and update it later
-
-Change their password
-
-Log out
-
+Create an account.
+Login to the application.
+View registered stores.
+Search stores by name or address.
+Check the overall rating of a store.
+Give a rating between 1 and 5.
+See their own rating.
+Change their rating later.
+Change their password.
+Logout.
 Store Owner
 
 A store owner can:
 
-Log in and view their assigned store
+Login to the application.
+View their assigned store.
+See the average rating of their store.
+See the users who have rated the store.
+Check rating activity and rating distribution.
+Change their password.
+Logout.
 
-See their store's average rating
-
-See which users have rated the store, and check rating activity
-
-Change their password
-
-Log out
-
-A store owner can only access rating information for their own assigned store.
+A store owner can only access rating information related to their assigned store.
 
 Registration and Login
 
-The public registration page offers two account types:
+The public registration page provides two choices:
 
 Normal User
-
 Store Owner
 
-Administrator accounts are created only by an existing administrator — there is no admin option on the public registration page.
+Administrator accounts are created by an existing administrator.
 
-There is no role selector on the login page. The backend identifies the account's role from the database, and the frontend redirects accordingly:
+There is no role selection on the login page. The backend identifies the role of the logged-in account and the frontend redirects the user accordingly.
 
-Role
+Admin        → Admin Dashboard
+Normal User  → Store Directory
+Store Owner  → Owner Dashboard
+Password Validation
 
-Redirects to
+The registration form validates the password before creating the account.
 
-Admin
+The password must:
 
-Admin Dashboard
+Be between 8 and 16 characters.
+Contain at least one uppercase letter.
+Contain at least one special character.
 
-Normal User
+Passwords are hashed using bcryptjs before being stored in the database.
 
-Store Directory
+Store and Rating Flow
 
-Store Owner
+Stores added through the Admin Dashboard are saved in MySQL and become available in the Normal User store directory.
 
-Owner Dashboard
+The normal user can search for the store, open its details and submit a rating.
 
-Validation Rules
+For a store that the user has already rated, the application shows the existing rating and allows it to be updated.
 
-Field
-
-Rule
-
-Name
-
-20–60 characters
-
-Address
-
-Max 400 characters
-
-Email
-
-Standard email format
-
-Password
-
-8–16 characters, at least 1 uppercase letter and 1 special character
-
-Rating
-
-Integer from 1 to 5
-
-Passwords are hashed with bcryptjs before being stored — they are never stored or returned in plain text.
+The Store Owner dashboard uses the stored ratings to calculate the average rating and display rating activity.
 
 Technologies Used
-
-Frontend: React, Vite, JavaScript, React Router, Axios, CSS
-Backend: Node.js, Express.js, REST APIs, JWT, bcryptjs, dotenv, CORS
-Database: MySQL, mysql2
-
-Project Structure
-
-The project is organized into three main parts:
-
-roxiler-rateboard/
-├── backend/      # Node.js + Express API
-├── frontend/     # React + Vite application
-├── database/     # MySQL schema and seed data
-├── scripts/      # Windows setup/start scripts
-├── README.md
-└── .gitignore
-
-Backend
-
-backend/
-├── src/
-│   ├── config/
-│   ├── controllers/
-│   ├── db/
-│   ├── middleware/
-│   ├── routes/
-│   ├── services/
-│   └── validators/
-├── .env.example
-└── package.json
-
 Frontend
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── context/
-│   ├── layouts/
-│   ├── pages/
-│   ├── services/
-│   └── styles/
-├── .env.example
-├── index.html
-├── package.json
-└── vite.config.js
-
-Database and Scripts
-
-database/
-├── schema.sql
-└── seed.sql
-
-scripts/
-├── setup-windows.bat
-├── start-backend.bat
-└── start-frontend.bat
-
+React
+Vite
+JavaScript
+React Router
+Axios
+CSS
+Backend
+Node.js
+Express.js
+REST APIs
+JWT
+bcryptjs
+dotenv
+CORS
+Database
+MySQL
+mysql2
+Project Structure
+roxiler-rateboard/
+│
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   └── ...
+│   ├── .env.example
+│   └── package.json
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── styles/
+│   │   └── ...
+│   └── package.json
+│
+├── database/
+├── .gitignore
+└── README.md
 Running the Project Locally
-
 Requirements
 
-Make sure these are installed before you start:
+Before running the project, make sure these are installed:
 
 Node.js
-
 npm
-
 MySQL
-
 Git
 
-Check your Node and npm versions with:
+You can check Node and npm using:
 
 node --version
 npm --version
-
-Step 1 — Clone the project
-
-git clone https://github.com/Khushi-m13/roxiler-rateboard
+1. Clone the project
+git clone YOUR_GITHUB_REPOSITORY_URL
 cd roxiler-rateboard
+2. Set up MySQL
 
-Step 2 — Set up MySQL
-
-Make sure your MySQL server is running, then create the database:
+Create the database:
 
 CREATE DATABASE rateboard;
 
-Step 3 — Configure the backend
+Make sure the MySQL server is running.
+
+3. Configure the backend
+
+Go to the backend folder:
 
 cd backend
 
-Copy .env.example to a new file named .env in the backend folder, and fill in your own values:
+Create a .env file using .env.example as a reference.
+
+Example:
 
 DB_HOST=localhost
 DB_PORT=3306
@@ -226,27 +186,39 @@ DB_NAME=rateboard
 JWT_SECRET=your_generated_secret
 PORT=5000
 
-.env is excluded from Git — do not commit it.
+The actual .env file should not be uploaded to GitHub.
 
-Step 4 — Install backend packages and start the server
-
+4. Install backend packages
 npm install
-npm run db:seed   # optional: adds demo accounts and sample data
+
+If the project contains the database seed command, run:
+
+npm run db:seed
+
+Start the backend:
+
 npm run dev
 
-The backend runs at http://localhost:5000.
+The backend runs on:
 
-Step 5 — Install frontend packages and start the app
+http://localhost:5000
+5. Install frontend packages
 
-Open a new terminal window:
+Open another terminal:
 
 cd frontend
 npm install
+
+Start the frontend:
+
 npm run dev
 
-Open the URL shown by Vite — usually http://localhost:5173.
+Open the URL shown by Vite, normally:
 
+http://localhost:5173
 Application Flow
+
+The basic flow of the application is:
 
                     Login
                       |
@@ -260,117 +232,122 @@ Application Flow
        Manage
     Users / Stores
 
-Normal user flow:
+For a normal user:
 
 Register
+   ↓
+Login
+   ↓
+Search Stores
+   ↓
+Open Store
+   ↓
+Submit Rating
+   ↓
+Update Rating if required
 
-Log in
+For a store owner:
 
-Search stores
-
-Open a store
-
-Submit a rating
-
-Update the rating later, if needed
-
-Store owner flow:
-
-Log in
-
-Open the Owner Dashboard
-
-View the assigned store
-
-Check the average rating
-
-Review rating activity
-
+Login
+   ↓
+Owner Dashboard
+   ↓
+Assigned Store
+   ↓
+Average Rating
+   ↓
+Rating Activity
 Security
 
-Passwords are hashed before being stored
+Some basic security measures included in the project are:
 
-JWT is used for authentication
+Passwords are hashed before being stored.
+JWT is used for authentication.
+Protected routes require authentication.
+Different roles have different permissions.
+Administrator registration is not publicly available.
+Store owners can only access their own store's rating information.
+Database credentials and JWT secrets are stored in environment variables.
+.env is excluded from Git.
+Validation
 
-Protected routes require authentication
+The application follows the validation requirements given in the assessment.
 
-Different roles have different permissions, enforced on the backend
+Name
 
-Administrator registration is not publicly available
+20 to 60 characters.
 
-Store owners can only access their own store's rating data
+Address
 
-Database credentials and the JWT secret are stored in environment variables
+Maximum 400 characters.
 
-.env is excluded from Git
+Email
+
+A valid email format is required.
+
+Password
+
+8 to 16 characters with at least:
+
+One uppercase letter
+One special character
+Rating
+
+Ratings are allowed from 1 to 5.
 
 Testing the Application
 
-Workflows tested during development:
+The main workflows I tested are:
 
-Normal user registration and login
+Normal user registration and login.
+Store owner registration and login.
+Administrator login.
+Role-based redirection after login.
+Store creation from the Admin Dashboard.
+Store visibility in the Normal User store directory.
+Store search.
+Rating submission.
+Rating update.
+Store owner rating dashboard.
+User editing from the Admin Dashboard.
+User removal.
+Password validation.
+Protected role-based pages.
 
-Store owner registration and login
-
-Administrator login
-
-Role-based redirection after login
-
-Store creation from the Admin Dashboard
-
-Store visibility in the Normal User directory
-
-Store search
-
-Rating submission and update
-
-Store owner rating dashboard
-
-User editing and removal from the Admin Dashboard
-
-Password validation
-
-Protected, role-based pages
-
-When testing locally, use separate accounts for each of the three roles.
+When testing locally, use separate test accounts for the three roles.
 
 Important Notes
 
 The application is intended to run locally with a MySQL database.
 
-.env is not included in the repository — use .env.example as a starting point.
+The .env file is not included in the repository because it contains local database credentials and the JWT secret. Use .env.example to create your own configuration.
 
-node_modules is not included — run npm install in both backend and frontend after cloning.
+node_modules is also not included. Run npm install inside both the backend and frontend folders after cloning the project.
 
 Assessment
 
-This project was developed as part of the Roxiler Systems Full Stack Developer assessment. It covers:
+This project was developed as part of the Roxiler Systems Full Stack Developer assessment.
+
+The implementation covers the required:
 
 React frontend
-
-Node.js / Express backend
-
+Node.js/Express backend
 MySQL database
-
-Three user roles with role-based access
-
-Authentication (JWT)
-
-Store and user management
-
+Three user roles
+Authentication
+Role-based access
+Store management
+User management
 Store search
-
-Store ratings and rating updates
-
+Store ratings
+Rating updates
 Store owner dashboard
-
 Admin dashboard
-
 Form validation
-
 Sorting and filtering
-
 Author
 
 Khushi Bandpatte
-Computer Science & Engineering, 2027
+
+Computer Science & Engineering
+2027
