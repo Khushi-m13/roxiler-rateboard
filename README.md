@@ -158,7 +158,7 @@ You can check Node and npm using:
 node --version
 npm --version
 1. Clone the project
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/Khushi-m13/roxiler-rateboard
 cd roxiler-rateboard
 2. Set up MySQL
 
