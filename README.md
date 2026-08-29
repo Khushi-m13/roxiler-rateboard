@@ -1,4 +1,4 @@
-RateBoard
+RateBoard 
 
 RateBoard is a web application for managing stores and their ratings. It has three types of users — System Administrator, Normal User and Store Owner. Each user gets different access after login depending on their role.
 
