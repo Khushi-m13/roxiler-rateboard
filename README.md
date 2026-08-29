@@ -226,6 +226,8 @@ DB_NAME=rateboard
 JWT_SECRET=your_generated_secret
 PORT=5000
 
+.env is excluded from Git — do not commit it.
+
 Step 4 — Install backend packages and start the server
 
 npm install
